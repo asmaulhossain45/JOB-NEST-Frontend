@@ -1,13 +1,15 @@
 import Lottie from "lottie-react";
 import { useContext } from "react";
 import { FaFacebookF, FaGoogle, FaTwitter } from "react-icons/fa";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import Swal from "sweetalert2";
 import signPage from "../../public/SignPage.json";
 import { AuthContext } from "../Providers/AuthProvider";
 
 const Register = () => {
   const { createUser, updateUser, user, handleLogOut } =
     useContext(AuthContext);
+  const navigate = useNavigate();
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -22,9 +24,17 @@ const Register = () => {
     // Create Account with Email & Password
     try {
       await createUser(email, password);
-      await updateUser(name);
+      await updateUser(name, photoURL);
       await handleLogOut();
-      alert("Account Created, Now Logged In");
+      navigate("/login");
+      Swal.fire({
+        position: "center",
+        icon: "success",
+        title: "Successful!",
+        text: "Please! Login Now....",
+        showConfirmButton: false,
+        timer: 1500,
+      });
     } catch (error) {
       console.log(error);
     }
@@ -40,7 +50,7 @@ const Register = () => {
   console.log(user);
 
   return (
-    <div className="grid grid-cols-1 md:grid-cols-2 gap-6 justify-items-center content-center place-items-center h-[92vh] px-4">
+    <div className="grid grid-cols-1 md:grid-cols-2 gap-6 justify-items-center content-center place-items-center min-h-[92vh] px-4">
       <div className="bg-White space-y-2 shadow-xl rounded-xl px-5 py-3 max-w-sm w-full mx-4">
         <h1 className="text-3xl text-Secondary font-bold mb-5">SIGN UP</h1>
         <form onSubmit={handleSubmit}>

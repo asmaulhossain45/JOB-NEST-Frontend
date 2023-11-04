@@ -1,9 +1,16 @@
 import { Squash as Hamburger } from "hamburger-react";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { Link, NavLink } from "react-router-dom";
+import { AuthContext } from "../Providers/AuthProvider";
 
 const Navbar = () => {
   const [isOpen, setOpen] = useState(false);
+  const { user, handleLogOut } = useContext(AuthContext);
+  const [profileToggle, setProfileToggle] = useState(false);
+
+  const handleLogOutButton = () => {
+    handleLogOut();
+  };
 
   const NavLinks = (
     <>
@@ -74,12 +81,43 @@ const Navbar = () => {
 
         {/* ----- User Login or Log Out ------ */}
         <div>
-          {isOpen ? (
-            <img
-              className="h-10"
-              src="https://i.ibb.co/XSZJkg3/Default-pfp-svg.png"
-              alt=""
-            />
+          {user ? (
+            <div className="dropdown dropdown-end">
+              <label tabIndex={0} className="btn btn-ghost btn-circle avatar">
+                <div className="w-10 rounded-full">
+                  <img
+                    onClick={() => setProfileToggle(!profileToggle)}
+                    className="h-6 rounded-full ring ring-primary ring-offset-base-100 ring-offset-2"
+                    src={
+                      user.photoURL
+                        ? user.photoURL
+                        : "https://i.ibb.co/XSZJkg3/Default-pfp-svg.png"
+                    }
+                  />
+                </div>
+              </label>
+              <ul
+                tabIndex={0}
+                className={`${
+                  profileToggle ? "" : "hidden"
+                } menu absolute right-0 menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-slate-900 rounded-box w-52 flex flex-col justify-center`}
+              >
+                {user.emailVerified ? (
+                  <h1 className="text-xs border-2 border-Secondary py-1 rounded-full bg-white text-Secondary flex justify-center">
+                    VERIFIED
+                  </h1>
+                ) : (
+                  <h1 className="text-xs border-2 border-Red py-1 rounded-full bg-white text-Red flex justify-center">
+                    UNVERIFIED
+                  </h1>
+                )}
+
+                <p className="text-center mt-1">{user.displayName}</p>
+                <button className="mt-1" onClick={handleLogOutButton}>
+                  Log Out
+                </button>
+              </ul>
+            </div>
           ) : (
             <Link className="text-xs font-semibold text-Primary" to="/login">
               Login

@@ -1,30 +1,36 @@
 import Lottie from "lottie-react";
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { FaFacebookF, FaGoogle, FaTwitter } from "react-icons/fa";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import Swal from "sweetalert2";
 import signPage from "../../public/SignPage.json";
 import { AuthContext } from "../Providers/AuthProvider";
 
 const Login = () => {
-  const { createUser, updateUser, user, handleLogOut } =
-    useContext(AuthContext);
+  const { user, loginUser } = useContext(AuthContext);
+  const [error, setError] = useState(null);
+  const navigate = useNavigate();
 
   const handleSubmit = async (event) => {
+    setError(null);
     event.preventDefault();
     const form = event.target;
-    const name = form.name.value;
-    const photoURL = form.photoURL.value;
     const email = form.email.value;
     const password = form.password.value;
-    const userInfo = { name, photoURL, email, password };
+    const userInfo = { email, password };
     console.log(userInfo);
 
     // Create Account with Email & Password
     try {
-      await createUser(email, password);
-      await updateUser(name);
-      await handleLogOut();
-      alert("Account Created, Now Logged In");
+      await loginUser(email, password);
+      navigate("/");
+      Swal.fire({
+        position: "center",
+        icon: "success",
+        title: "Logged In Successful...",
+        showConfirmButton: false,
+        timer: 1500,
+      });
     } catch (error) {
       console.log(error);
     }
@@ -40,7 +46,7 @@ const Login = () => {
   console.log(user);
 
   return (
-    <div className="grid grid-cols-1 md:grid-cols-2 gap-6 justify-items-center content-center place-items-center h-[92vh] px-4">
+    <div className="grid grid-cols-1 md:grid-cols-2 gap-6 justify-items-center content-center place-items-center min-h-[92vh] px-4">
       <div className="bg-White space-y-2 shadow-xl rounded-xl px-5 py-3 max-w-sm w-full mx-4">
         <h1 className="text-3xl text-Secondary font-bold mb-5">SIGN IN</h1>
         <form onSubmit={handleSubmit}>
@@ -52,6 +58,7 @@ const Login = () => {
               type="email"
               name="email"
               placeholder="email@example.com"
+              defaultValue="asmaulhossain@gmail.com"
               required
             />
           </div>
@@ -64,6 +71,7 @@ const Login = () => {
               type="password"
               name="password"
               placeholder="*********"
+              defaultValue="123456"
               required
             />
           </div>

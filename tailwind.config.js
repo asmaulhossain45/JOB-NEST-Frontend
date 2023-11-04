@@ -5,6 +5,7 @@ export default {
     colors: {
       Transparent: "transparent",
       White: "#ffffff",
+      Red: "#ff6347",
       Black: "#000000",
       Slate: "#334155",
       Primary: "#0076be",

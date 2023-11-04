@@ -12,7 +12,7 @@ import auth from "../Firebase/firebase.config";
 export const AuthContext = createContext(null);
 
 const AuthProvider = ({ children }) => {
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
   const [user, setUser] = useState(null);
 
   //   Sign Up User with E-mail & Password
@@ -22,15 +22,16 @@ const AuthProvider = ({ children }) => {
   };
 
   //   Sign In User with E-mail & Password
-  const signInUser = (email, password) => {
+  const loginUser = (email, password) => {
     setLoading(true);
     return signInWithEmailAndPassword(auth, email, password);
   };
 
   //   Update User Profile
-  const updateUser = (name) => {
+  const updateUser = (name, photoURL) => {
     return updateProfile(auth.currentUser, {
       displayName: name,
+      photoURL: photoURL,
     });
   };
 
@@ -53,7 +54,7 @@ const AuthProvider = ({ children }) => {
 
   const values = {
     createUser,
-    signInUser,
+    loginUser,
     updateUser,
     handleLogOut,
     user,
