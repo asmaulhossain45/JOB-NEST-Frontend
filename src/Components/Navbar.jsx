@@ -100,20 +100,25 @@ const Navbar = () => {
                 tabIndex={0}
                 className={`${
                   profileToggle ? "" : "hidden"
-                } menu absolute right-0 menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-slate-900 rounded-box w-52 flex flex-col justify-center`}
+                } menu absolute right-0 menu-sm dropdown-content mt-3 z-[1] px-3 py-4 bg-White rounded-s-xl w-52 flex flex-col justify-center`}
               >
-                {user.emailVerified ? (
-                  <h1 className="text-xs border-2 border-Secondary py-1 rounded-full bg-white text-Secondary flex justify-center">
-                    VERIFIED
-                  </h1>
-                ) : (
-                  <h1 className="text-xs border-2 border-Red py-1 rounded-full bg-white text-Red flex justify-center">
-                    UNVERIFIED
-                  </h1>
-                )}
+                <div className="flex justify-center mb-2">
+                  <img
+                  className="h-16 rounded-full ring ring-Secondary ring-offset-base-100 ring-offset-2"
+                    src={
+                      user.photoURL
+                        ? user.photoURL
+                        : "https://i.ibb.co/XSZJkg3/Default-pfp-svg.png"
+                    }
+                    alt=""
+                  />
+                </div>
 
-                <p className="text-center mt-1">{user.displayName}</p>
-                <button className="mt-1" onClick={handleLogOutButton}>
+                <p className="text-center font-semibold uppercase mt-1">{user.displayName}</p>
+                <button
+                  className="mt-1 text-White bg-Secondary rounded-full text-base font-semibold py-1"
+                  onClick={handleLogOutButton}
+                >
                   Log Out
                 </button>
               </ul>
