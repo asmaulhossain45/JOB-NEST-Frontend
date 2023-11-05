@@ -1,4 +1,3 @@
-import Footer from "../../Components/Footer";
 import HeroSection from "./HeroSection";
 import JobCategories from "./JobCategories";
 import MembersReview from "./MembersReview/MembersReview";
@@ -7,7 +6,7 @@ import TotalSummery from "./TotalSummery";
 
 const Home = () => {
   return (
-    <div className="">
+    <div>
       <HeroSection />
       <div className="my-10">
         <JobCategories />
@@ -21,7 +20,6 @@ const Home = () => {
       <div className="my-10">
         <MembersReview />
       </div>
-      <Footer />
     </div>
   );
 };

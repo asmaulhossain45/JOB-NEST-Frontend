@@ -6,12 +6,16 @@ const TabProducts = () => {
     <div className="bg-BgPrimary h-96">
       <Tabs>
         <TabList>
+          <Tab>All Jobs</Tab>
           <Tab>On Site Job</Tab>
           <Tab>Remote Job</Tab>
           <Tab>Hybrid</Tab>
           <Tab>Part Time</Tab>
         </TabList>
 
+        <TabPanel>
+          <h2>All Jobs</h2>
+        </TabPanel>
         <TabPanel>
           <h2>On Site Job</h2>
         </TabPanel>

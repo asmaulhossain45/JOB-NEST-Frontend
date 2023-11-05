@@ -19,9 +19,6 @@ const MembersReview = () => {
         <h1 className="text-xl md:text-3xl lg:text-4xl font-bold text-center text-Secondary mb-2">
           Members Review
         </h1>
-        <p className="text-center text-xs md:text-base text-Slate/70 font-medium">
-          Discover By Categories
-        </p>
       </div>
       <Swiper
         spaceBetween={30}
@@ -44,7 +41,7 @@ const MembersReview = () => {
                 />
               </div>
               <h1 className="text-xl font-semibold">Asmaul Hossain</h1>
-              <p className="max-w-xs md:max-w-xl px-4">
+              <p className="max-w-xs md:max-w-xl px-4 text-Slate/70 text-base">
                 Lorem ipsum, dolor sit amet consectetur adipisicing elit. Eum,
                 beatae consequatur accusantium eius exercitationem provident?
               </p>
