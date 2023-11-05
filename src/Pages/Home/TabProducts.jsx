@@ -1,32 +1,26 @@
-import { Tab, TabList, TabPanel, Tabs } from "react-tabs";
+import { useState } from "react";
+import { TabList, TabPanel, Tabs } from "react-tabs";
 import "react-tabs/style/react-tabs.css";
 
 const TabProducts = () => {
+  const [selectedTab, setSelectedTab] = useState(0);
+
+  const handleAllJobs = () => {
+    console.log("HHHH");
+  };
+
   return (
     <div className="bg-BgPrimary h-96">
       <Tabs>
         <TabList>
-          <Tab>All Jobs</Tab>
-          <Tab>On Site Job</Tab>
-          <Tab>Remote Job</Tab>
-          <Tab>Hybrid</Tab>
-          <Tab>Part Time</Tab>
+          <Tabs>Onsite</Tabs>
+          <Tabs>Remote</Tabs>
+          <Tabs>hybrid</Tabs>
+          <Tabs>Part Time</Tabs>
         </TabList>
 
         <TabPanel>
-          <h2>All Jobs</h2>
-        </TabPanel>
-        <TabPanel>
-          <h2>On Site Job</h2>
-        </TabPanel>
-        <TabPanel>
-          <h2>Remote Job</h2>
-        </TabPanel>
-        <TabPanel>
-          <h2>Hybrid</h2>
-        </TabPanel>
-        <TabPanel>
-          <h2>Part Time</h2>
+          <h1>Tab Tab</h1>
         </TabPanel>
       </Tabs>
     </div>

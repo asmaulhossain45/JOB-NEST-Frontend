@@ -4,7 +4,7 @@ const Blogs = () => {
   return (
     <div className="md:grid grid-cols-4 gap-4 my-10 px-4">
       <div className="">
-        <h1 className="text-xl md:text-2xl font-semibold m-4 text-Black">
+        <h1 className="text-xl md:text-2xl font-semibold mx-4 mb-4 text-Black">
           Shortcut
         </h1>
         <div className="grid md:flex flex-col grid-cols-2 gap-4 w-full px-4 mb-6">
