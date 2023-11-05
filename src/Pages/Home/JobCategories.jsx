@@ -29,7 +29,7 @@ const JobCategories = () => {
             key={category.id}
             className="space-y-2 bg-BgPrimary/20 shadow-md p-3 hover:bg-Secondary duration-300 rounded-lg"
           >
-            <h1 className="text-base md:text-lg font-semibold">
+            <h1 className="text-base md:text-lg text-Primary font-semibold">
               Category Title
             </h1>
             <p className="text-xs md:text-base text-Slate/70 font-semibold">

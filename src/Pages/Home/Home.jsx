@@ -1,6 +1,7 @@
 import Footer from "../../Components/Footer";
 import HeroSection from "./HeroSection";
 import JobCategories from "./JobCategories";
+import MembersReview from "./MembersReview/MembersReview";
 import TabProducts from "./TabProducts";
 import TotalSummery from "./TotalSummery";
 
@@ -16,6 +17,9 @@ const Home = () => {
       </div>
       <div className="my-10">
         <TotalSummery />
+      </div>
+      <div className="my-10">
+        <MembersReview />
       </div>
       <Footer />
     </div>
