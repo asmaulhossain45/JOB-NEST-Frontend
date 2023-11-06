@@ -1,4 +1,5 @@
 import { createBrowserRouter } from "react-router-dom";
+import PostDetails from "../Components/PostDetails";
 import MainLayout from "../MainLayout/MainLayout";
 import AddJob from "../Pages/AddJob/AddJob";
 import AllJobs from "../Pages/AllJobs/AllJobs";
@@ -27,6 +28,10 @@ const router = createBrowserRouter([
       {
         path: "/all-jobs",
         element: <AllJobs />,
+      },
+      {
+        path: `details/:id`,
+        element: <PostDetails />,
       },
       {
         path: "/add-job",

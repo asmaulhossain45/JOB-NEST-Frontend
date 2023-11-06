@@ -29,6 +29,7 @@ const AddJob = () => {
     const jobInfo = {
       title,
       userName,
+      email: user.email,
       companyName,
       companySite,
       location,
@@ -47,7 +48,7 @@ const AddJob = () => {
     console.log(jobInfo);
   };
 
-  console.log({postDate})
+  console.log({ postDate });
 
   return (
     <div className="bg-Transparent min-h-[90vh] flex justify-center items-center my-6">
