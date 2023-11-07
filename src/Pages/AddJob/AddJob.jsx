@@ -7,17 +7,17 @@ import { AuthContext } from "../../Providers/AuthProvider";
 const AddJob = () => {
   const { user } = useContext(AuthContext);
   const [postDate, setPostDate] = useState(new Date());
-  const [deadDate, setDeadDate] = useState(new Date());
+  const [deadline, setDeadline] = useState(new Date());
 
   const handleAddProduct = (event) => {
     event.preventDefault();
     const form = event.target;
     const title = form.title.value;
-    const userName = form.userName.value;
+    const ceoName = form.userName.value;
     const companyName = form.companyName.value;
     const companySite = form.companySite.value;
     const location = form.location.value;
-    const workPlace = form.workPlace.value;
+    const companyLogo = form.companyLogo.value;
     const category = form.category.value;
     const gender = form.gender.value;
     const bannerURL = form.bannerURL.value;
@@ -28,17 +28,17 @@ const AddJob = () => {
     const description = form.description.value;
     const jobInfo = {
       title,
-      userName,
-      email: user.email,
+      ceoName,
+      companyEmail: user.email,
       companyName,
       companySite,
       location,
-      workPlace,
+      companyLogo,
       category,
       gender,
       bannerURL,
       postDate,
-      deadDate,
+      deadline,
       age,
       salary,
       experience,
@@ -129,15 +129,15 @@ const AddJob = () => {
                 id="5"
               />
             </div>
-            {/* ==== Work Place ==== */}
+            {/* ==== Company Logo ==== */}
             <div className="w-full my-1">
-              <label className="font-semibold">Work Place</label>
+              <label className="font-semibold">Company Logo</label>
               <br />
               <input
                 className="bg-transparent border-2 border-Black/30 outline-0 pl-3 py-1 rounded-md w-full"
-                type="text"
-                name="workPlace"
-                placeholder="From Home / At Office"
+                type="url"
+                name="companyLogo"
+                placeholder="https://www.companyLogo.png"
                 id="6"
               />
             </div>
@@ -217,9 +217,9 @@ const AddJob = () => {
                   className="bg-transparent border-2 border-Black/30 outline-0 px-3 py-1 rounded-md w-full"
                   showIcon
                   dateFormat="dd/MM/yyyy"
-                  selected={deadDate}
+                  selected={deadline}
                   showWeekNumbers
-                  onChange={(date) => setDeadDate(date)}
+                  onChange={(date) => setDeadline(date)}
                   id="11"
                 />
               </div>
