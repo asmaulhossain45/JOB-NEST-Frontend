@@ -11,7 +11,7 @@ const MyJobs = () => {
   const axios = useAxios();
 
   const myAllJobs = async () => {
-    const res = await axios.get(`allJobPost?email=${"hr@example.com"}`);
+    const res = await axios.get(`allJobPost?email=${user.email}`);
     return res;
   };
 

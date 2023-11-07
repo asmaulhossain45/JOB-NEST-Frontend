@@ -3,13 +3,15 @@ import { useContext, useState } from "react";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import { Helmet } from "react-helmet";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
+import Swal from "sweetalert2";
 import Loading from "../../Components/Loading";
 import useAxios from "../../CustomHooks/useAxios";
 import { AuthContext } from "../../Providers/AuthProvider";
 
 const UpdatePost = () => {
   const { id } = useParams();
+  const navigate = useNavigate();
   const { user } = useContext(AuthContext);
   const [updatePostDate, setUpdatePostDate] = useState(new Date());
   const [updateDeadline, setUpdateDeadline] = useState(new Date());
@@ -48,6 +50,7 @@ const UpdatePost = () => {
     return console.log(error.message);
   }
   const {
+    _id,
     title,
     companyName,
     companySite,
@@ -64,7 +67,7 @@ const UpdatePost = () => {
   } = data.data;
 
   //   Update Data ========
-  const handleUpdateProduct = (event) => {
+  const handleUpdateProduct = async (event) => {
     event.preventDefault();
     const form = event.target;
     const title = form.title.value;
@@ -81,7 +84,7 @@ const UpdatePost = () => {
     const experience = form.experience.value;
     const education = form.education.value;
     const description = form.description.value;
-    const jobInfo = {
+    const updateInfo = {
       title,
       ceoName,
       companyEmail: user.email,
@@ -100,7 +103,21 @@ const UpdatePost = () => {
       education,
       description,
     };
-    console.log(jobInfo);
+    try {
+      await axios.patch(`update-post/${_id}`, updateInfo).then((res) => {
+        console.log(res);
+        navigate("/my-jobs");
+        Swal.fire({
+          position: "center",
+          icon: "success",
+          title: "Post Updated Successfully",
+          showConfirmButton: false,
+          timer: 1500,
+        });
+      });
+    } catch (error) {
+      console.log("Post Error: ", error.message);
+    }
   };
 
   return (
