@@ -1,5 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
 import { useContext } from "react";
+import { Link } from "react-router-dom";
 import DataLoading from "../../Components/DataLoading";
 import NoData from "../../Components/NoData";
 import useAxios from "../../CustomHooks/useAxios";
@@ -27,10 +28,6 @@ const MyJobs = () => {
   }
   const myAllJob = data?.data.result;
 
-  const handleUpdateButton = (id) => {
-    console.log(id);
-  };
-
   const handleDeleteButton = (id) => {
     console.log(id);
   };
@@ -47,12 +44,9 @@ const MyJobs = () => {
                 <h1>{job.category}</h1>
                 <h1>{job.email}</h1>
                 <h1>{job.deadDate}</h1>
-                <button
-                  onClick={() => handleUpdateButton(job._id)}
-                  className="btn bg-Red"
-                >
+                <Link to={`/update-post/${job._id}`} className="btn bg-Red">
                   Update
-                </button>
+                </Link>
                 <button
                   onClick={() => handleDeleteButton(job._id)}
                   className="btn bg-Red"
