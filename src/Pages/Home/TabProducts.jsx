@@ -2,7 +2,7 @@ import { useQuery } from "@tanstack/react-query";
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import "react-tabs/style/react-tabs.css";
-import Loading from "../../Components/Loading";
+import DataLoading from "../../Components/DataLoading";
 import useAxios from "../../CustomHooks/useAxios";
 
 const TabProducts = () => {
@@ -10,7 +10,7 @@ const TabProducts = () => {
   const [selectedTab, setSelectedTab] = useState("");
 
   const tabPosts = async () => {
-    const res = await axios.get(`homeTab?category=${selectedTab}`);
+    const res = await axios.get(`allJobPost?category=${selectedTab}`);
     return res;
   };
 
@@ -20,7 +20,7 @@ const TabProducts = () => {
   });
 
   if (isLoading) {
-    return <Loading />;
+    return <DataLoading />;
   }
   if (error) {
     return console.log(error.message);
@@ -30,7 +30,8 @@ const TabProducts = () => {
     setSelectedTab(value);
   };
 
-  const tabPost = data?.data;
+  const tabPost = data?.data.result;
+  console.log(data);
 
   return (
     <div className="bg-BgPrimary">
@@ -38,7 +39,9 @@ const TabProducts = () => {
         <button
           onClick={() => handleTabButton("")}
           className={
-            selectedTab === "" ? "bg-Slate/10 font-semibold px-2 py-2" : "font-semibold px-2 py-2"
+            selectedTab === ""
+              ? "bg-Slate/10 font-semibold px-2 py-2"
+              : "font-semibold px-2 py-2"
           }
         >
           All-Jobs

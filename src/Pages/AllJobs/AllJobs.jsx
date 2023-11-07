@@ -2,7 +2,7 @@ import { useQuery } from "@tanstack/react-query";
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import banner from "../../../public/Banner.jpg";
-import Loading from "../../Components/Loading";
+import DataLoading from "../../Components/DataLoading";
 import NoData from "../../Components/NoData";
 import useAxios from "../../CustomHooks/useAxios";
 
@@ -35,12 +35,12 @@ const AllJobs = () => {
   });
 
   if (isLoading) {
-    return <Loading />;
+    return <DataLoading />;
   }
   if (error) {
     return console.log(error.message);
   }
-  const allJobPost = data?.data.result;
+  const allJobPost = data?.data?.result;
 
   //   ===== Pagination =====
   const postCount = data.data.jobPostCount;
@@ -98,7 +98,7 @@ const AllJobs = () => {
           <img className="h-full w-full object-cover" src={banner} alt="d" />
         </div>
       </div>
-
+      <div>{isLoading ? "Loading....." : ""}</div>
       {/* Display All Job Post */}
       {allJobPost?.length > 0 ? (
         <div className="my-10">
