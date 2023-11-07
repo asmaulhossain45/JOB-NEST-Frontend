@@ -1,23 +1,43 @@
-import { useQuery } from "@tanstack/react-query";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { useContext } from "react";
 import { Link } from "react-router-dom";
+import Swal from "sweetalert2";
 import DataLoading from "../../Components/DataLoading";
 import NoData from "../../Components/NoData";
 import useAxios from "../../CustomHooks/useAxios";
 import { AuthContext } from "../../Providers/AuthProvider";
 
 const MyJobs = () => {
+  const queryClient = useQueryClient();
   const { user } = useContext(AuthContext);
   const axios = useAxios();
 
+  // Data load Function
   const myAllJobs = async () => {
-    const res = await axios.get(`allJobPost?email=${user.email}`);
+    const res = await axios.get(`allJobPost?email=${"hr@example.com"}`);
     return res;
   };
 
   const { isLoading, error, data } = useQuery({
     queryKey: ["myAllJob", user.email],
     queryFn: myAllJobs,
+  });
+
+  // Delete Post Using Mutation
+  const mutation = useMutation({
+    mutationFn: (id) => {
+      return axios.delete(`update-post/${id}`);
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["myAllJob"] });
+      Swal.fire({
+        position: "center",
+        icon: "success",
+        title: "Post Deleted Successfully",
+        showConfirmButton: false,
+        timer: 1500,
+      });
+    },
   });
 
   if (isLoading) {
@@ -27,10 +47,6 @@ const MyJobs = () => {
     return console.log(error.message);
   }
   const myAllJob = data?.data.result;
-
-  const handleDeleteButton = (id) => {
-    console.log(id);
-  };
 
   return (
     <div>
@@ -48,7 +64,9 @@ const MyJobs = () => {
                   Update
                 </Link>
                 <button
-                  onClick={() => handleDeleteButton(job._id)}
+                  onClick={() => {
+                    mutation.mutate(job._id);
+                  }}
                   className="btn bg-Red"
                 >
                   Delete
