@@ -104,14 +104,14 @@ const PostDetails = () => {
       });
       await axios.patch(`details/${_id}`).then((res) => {
         console.log(res);
-      });
-      navigate("/all-jobs");
-      Swal.fire({
-        position: "center",
-        icon: "success",
-        title: "Applications Submit Successfully",
-        showConfirmButton: false,
-        timer: 1500,
+        navigate("/all-jobs");
+        Swal.fire({
+          position: "center",
+          icon: "success",
+          title: "Applications Submit Successfully",
+          showConfirmButton: false,
+          timer: 1500,
+        });
       });
     } catch (error) {
       console.log("Post Error: ", error.message);

@@ -2,10 +2,15 @@ import { useContext, useState } from "react";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import { Helmet } from "react-helmet";
+import { useNavigate } from "react-router-dom";
+import Swal from "sweetalert2";
+import useAxios from "../../CustomHooks/useAxios";
 import { AuthContext } from "../../Providers/AuthProvider";
 
 const AddJob = () => {
   const { user } = useContext(AuthContext);
+  const navigate = useNavigate();
+  const axios = useAxios();
   const [postDate, setPostDate] = useState(new Date());
   const [deadline, setDeadline] = useState(new Date());
 
@@ -24,7 +29,7 @@ const AddJob = () => {
   const formattedDeadline = `${day2}-${month2}-${year2}`;
   console.log("Formatted Deadline: ", formattedDeadline);
 
-  const handleAddProduct = (event) => {
+  const handleAddProduct = async (event) => {
     event.preventDefault();
     const form = event.target;
     const title = form.title.value;
@@ -60,7 +65,21 @@ const AddJob = () => {
       education,
       description,
     };
-    console.log(jobInfo);
+    try {
+      await axios.post("allJobPost", jobInfo).then((res) => {
+        console.log(res);
+        navigate("/all-jobs");
+        Swal.fire({
+          position: "center",
+          icon: "success",
+          title: "Your Job Post Successfully",
+          showConfirmButton: false,
+          timer: 1500,
+        });
+      });
+    } catch (error) {
+      console.log("Post Error: ", error.message);
+    }
   };
 
   console.log({ postDate });
