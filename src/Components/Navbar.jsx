@@ -1,15 +1,17 @@
 import { Squash as Hamburger } from "hamburger-react";
 import { useContext, useState } from "react";
-import { Link, NavLink } from "react-router-dom";
+import { Link, NavLink, useNavigate } from "react-router-dom";
 import { AuthContext } from "../Providers/AuthProvider";
 
 const Navbar = () => {
   const [isOpen, setOpen] = useState(false);
+  const navigate = useNavigate();
   const { user, handleLogOut } = useContext(AuthContext);
   const [profileToggle, setProfileToggle] = useState(false);
 
   const handleLogOutButton = () => {
     handleLogOut();
+    navigate("/");
   };
 
   const NavLinks = (
@@ -104,7 +106,7 @@ const Navbar = () => {
               >
                 <div className="flex justify-center mb-2">
                   <img
-                  className="h-16 rounded-full ring ring-Secondary ring-offset-base-100 ring-offset-2"
+                    className="h-16 rounded-full ring ring-Secondary ring-offset-base-100 ring-offset-2"
                     src={
                       user.photoURL
                         ? user.photoURL
@@ -114,7 +116,9 @@ const Navbar = () => {
                   />
                 </div>
 
-                <p className="text-center font-semibold uppercase mt-1">{user.displayName}</p>
+                <p className="text-center font-semibold uppercase mt-1">
+                  {user.displayName}
+                </p>
                 <button
                   className="mt-1 text-White bg-Secondary rounded-full text-base font-semibold py-1"
                   onClick={handleLogOutButton}

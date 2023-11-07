@@ -7,7 +7,7 @@ import signPage from "../../public/SignPage.json";
 import { AuthContext } from "../Providers/AuthProvider";
 
 const Login = () => {
-  const { user, loginUser } = useContext(AuthContext);
+  const { user, loginUser, setLoading } = useContext(AuthContext);
   const [error, setError] = useState(null);
   const navigate = useNavigate();
 
@@ -33,6 +33,7 @@ const Login = () => {
       });
     } catch (error) {
       console.log(error);
+      setLoading(false);
     }
   };
 

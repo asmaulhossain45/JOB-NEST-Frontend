@@ -7,7 +7,7 @@ import signPage from "../../public/SignPage.json";
 import { AuthContext } from "../Providers/AuthProvider";
 
 const Register = () => {
-  const { createUser, updateUser, user, handleLogOut } =
+  const { createUser, updateUser, user, handleLogOut, setLoading } =
     useContext(AuthContext);
   const navigate = useNavigate();
 
@@ -37,6 +37,7 @@ const Register = () => {
       });
     } catch (error) {
       console.log(error);
+      setLoading(false);
     }
   };
 
