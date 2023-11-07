@@ -3,6 +3,7 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 import banner from "../../../public/Banner.jpg";
 import Loading from "../../Components/Loading";
+import NoData from "../../Components/NoData";
 import useAxios from "../../CustomHooks/useAxios";
 
 const AllJobs = () => {
@@ -11,6 +12,15 @@ const AllJobs = () => {
   const [page, setPage] = useState(1);
   const [activePage, setActivePage] = useState(page);
   const limit = 3;
+
+  // Search Job By Title
+  const handleSearchButton = (event) => {
+    setSearchText("");
+    event.preventDefault();
+    const inputText = event.target.searchText.value;
+    setSearchText(inputText);
+    event.target.reset();
+  };
 
   const allJobPosts = async () => {
     const res = await axios.get(
@@ -32,18 +42,11 @@ const AllJobs = () => {
   }
   const allJobPost = data?.data.result;
 
-  // Search Job By Title
-  const handleSearchButton = (event) => {
-    setSearchText("");
-    event.preventDefault();
-    const inputText = event.target.searchText.value;
-    setSearchText(inputText);
-    event.target.reset();
-  };
-
   //   ===== Pagination =====
   const postCount = data.data.jobPostCount;
   const pageCount = Math.ceil(postCount / limit);
+  console.log(postCount);
+
   const pages = [];
   for (let i = 1; i <= pageCount; i++) {
     pages.push(i);
@@ -62,7 +65,7 @@ const AllJobs = () => {
     setPage(page + 1);
     setActivePage(page + 1);
   };
-  console.log(page);
+
   return (
     <div>
       {/* ===== Header ===== */}
@@ -96,85 +99,90 @@ const AllJobs = () => {
         </div>
       </div>
 
-      {/* ===== Display Job Post ===== */}
-      <div className="overflow-x-auto mt-10">
-        <table className="table">
-          {/* head */}
-          <thead className="">
-            <tr className="bg-Slate text-White">
-              <th>Title</th>
-              <th>Date</th>
-              <th>Salary</th>
-              <th>Action</th>
-            </tr>
-          </thead>
-          <tbody className="">
-            {/* row 1 */}
-            {allJobPost.map((jobPost, idx) => (
-              <tr key={idx} className="bg-Primary">
-                <td>
-                  <div className="flex items-center space-x-2">
-                    <div>
-                      <div className="font-bold">{jobPost.title}</div>
-                      <div className="text-sm opacity-50">
-                        {jobPost.userName}
+      {/* Display All Job Post */}
+      {allJobPost?.length > 0 ? (
+        <div className="my-10">
+          <div className="overflow-x-auto">
+            <table className="table">
+              {/* head */}
+              <thead className="">
+                <tr className="bg-Slate text-White">
+                  <th>Title</th>
+                  <th>Date</th>
+                  <th>Salary</th>
+                  <th>Action</th>
+                </tr>
+              </thead>
+              <tbody className="">
+                {/* row 1 */}
+                {allJobPost.map((jobPost, idx) => (
+                  <tr key={idx} className="bg-Primary">
+                    <td>
+                      <div className="flex items-center space-x-2">
+                        <div>
+                          <div className="font-bold">{jobPost.title}</div>
+                          <div className="text-sm opacity-50">
+                            {jobPost.userName}
+                          </div>
+                        </div>
                       </div>
-                    </div>
-                  </div>
-                </td>
-                <td>
-                  Deadline: {jobPost.deadDate}
-                  <br />
-                  <span>Post Date: {jobPost.postDate}</span>
-                </td>
-                <td>{jobPost.SalaryRange}</td>
-                <th>
-                  <Link
-                    to={`/details/${jobPost._id}`}
-                    Id={jobPost._id}
-                    className="join-item"
-                  >
-                    Details
-                  </Link>
-                </th>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      </div>
-
-      {/* ===== Pagination ===== */}
-      <div
-        className={
-          allJobPost.length > 0 ? "join flex justify-center" : "hidden"
-        }
-      >
-        <button
-          onClick={handlePrevButton}
-          className={page === 1 ? "hidden" : "join-item btn"}
-        >
-          Prev
-        </button>
-        {pages.map((page, idx) => (
-          <button
-            onClick={() => handlePageClick(page)}
-            key={idx}
+                    </td>
+                    <td>
+                      Deadline: {jobPost.deadDate}
+                      <br />
+                      <span>Post Date: {jobPost.postDate}</span>
+                    </td>
+                    <td>{jobPost.SalaryRange}</td>
+                    <th>
+                      <Link
+                        to={`/details/${jobPost._id}`}
+                        id={jobPost._id}
+                        className="join-item"
+                      >
+                        Details
+                      </Link>
+                    </th>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+          {/* ===== Pagination ===== */}
+          <div
             className={
-              page === activePage
-                ? "bg-Slate/10 join-item btn"
-                : "join-item btn"
+              postCount > limit ? "join flex justify-center" : "hidden"
             }
           >
-            {page}
-          </button>
-        ))}
-        <button
-          onClick={handleNextButton}
-          className={pages.length === page ? "hidden" : "join-item btn"}
-        >
-          Next
-        </button>
-      </div>
+            <button
+              onClick={handlePrevButton}
+              className={page === 1 ? "hidden" : "join-item btn"}
+            >
+              Prev
+            </button>
+            {pages.map((page, idx) => (
+              <button
+                onClick={() => handlePageClick(page)}
+                key={idx}
+                className={
+                  page === activePage
+                    ? "bg-Slate/10 join-item btn"
+                    : "join-item btn"
+                }
+              >
+                {page}
+              </button>
+            ))}
+            <button
+              onClick={handleNextButton}
+              className={pages.length === page ? "hidden" : "join-item btn"}
+            >
+              Next
+            </button>
+          </div>
+        </div>
+      ) : (
+        <NoData />
+      )}
     </div>
   );
 };
