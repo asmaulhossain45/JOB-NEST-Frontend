@@ -3,7 +3,7 @@ import NoDataFound from "../../public/DataNotFound.json";
 
 const NoData = () => {
   return (
-    <div className="h-[50vh] bg-Transparent flex justify-center object-cover">
+    <div className="h-[50vh] flex justify-center object-cover">
       <Lottie animationData={NoDataFound} loop={true} />
     </div>
   );

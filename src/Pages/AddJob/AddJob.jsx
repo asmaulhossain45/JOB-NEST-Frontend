@@ -64,6 +64,7 @@ const AddJob = () => {
       experience,
       education,
       description,
+      JobApplicantsNumber: 0,
     };
     try {
       await axios.post("allJobPost", jobInfo).then((res) => {

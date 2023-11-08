@@ -3,7 +3,7 @@ import DataLoadAnime from "../../public/DataLoading.json";
 
 const DataLoading = () => {
   return (
-    <div className="h-[90vh] bg-Transparent flex justify-center">
+    <div className="h-[50vh] flex justify-center">
       <Lottie animationData={DataLoadAnime} loop={true} />
     </div>
   );

@@ -14,7 +14,7 @@ const MyJobs = () => {
 
   // Data load Function
   const myAllJobs = async () => {
-    const res = await axios.get(`allJobPost?email=${user.email}`);
+    const res = await axios.get(`my-job?email=${user.email}`);
     return res;
   };
 
@@ -46,7 +46,7 @@ const MyJobs = () => {
   if (error) {
     return console.log(error.message);
   }
-  const myAllJob = data?.data.result;
+  const myAllJob = data?.data;
 
   return (
     <div>

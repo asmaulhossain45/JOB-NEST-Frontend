@@ -35,13 +35,19 @@ const TabProducts = () => {
   console.log(data);
 
   return (
-    <div className="bg-BgPrimary">
-      <div className="flex justify-start text-xs items-center border-b-2">
+    <div className="">
+      <h1 className="text-center text-Primary text-xl md:text-2xl lg:text-3xl font-bold">
+        JOB BY CATEGORY
+      </h1>
+      <p className="text-center font-semibold text-xs md:text-sm lg:text-lg text-Black/60 mb-3 md:mb-5 lg:mb-7">
+        Discover What’s Beyond Your Limit
+      </p>
+      <div className="flex bg-Primary text-White justify-start text-[11px] md:text-base items-center border-b-2 px-4 md:px-8 lg:px-12">
         <button
           onClick={() => handleTabButton("")}
           className={
             selectedTab === ""
-              ? "bg-Slate/10 font-semibold px-2 py-2"
+              ? "bg-Secondary text-Black font-semibold px-2 py-2"
               : "font-semibold px-2 py-2"
           }
         >
@@ -51,7 +57,7 @@ const TabProducts = () => {
           onClick={() => handleTabButton("On Site")}
           className={
             selectedTab === "On Site"
-              ? "bg-Slate/10 font-semibold px-2 py-2"
+              ? "bg-Secondary text-Black font-semibold px-2 py-2"
               : "font-semibold px-2 py-2"
           }
         >
@@ -61,7 +67,7 @@ const TabProducts = () => {
           onClick={() => handleTabButton("Remote")}
           className={
             selectedTab === "Remote"
-              ? "bg-Slate/10 font-semibold px-2 py-2"
+              ? "bg-Secondary text-Black font-semibold px-2 py-2"
               : "font-semibold px-2 py-2"
           }
         >
@@ -71,7 +77,7 @@ const TabProducts = () => {
           onClick={() => handleTabButton("Hybrid")}
           className={
             selectedTab === "Hybrid"
-              ? "bg-Slate/10 font-semibold px-2 py-2"
+              ? "bg-Secondary text-Black font-semibold px-2 py-2"
               : "font-semibold px-2 py-2"
           }
         >
@@ -81,7 +87,7 @@ const TabProducts = () => {
           onClick={() => handleTabButton("Part-Time")}
           className={
             selectedTab === "Part-Time"
-              ? "bg-Slate/10 font-semibold px-2 py-2"
+              ? "bg-Secondary text-Black font-semibold px-2 py-2"
               : "font-semibold px-2 py-2"
           }
         >
@@ -90,17 +96,37 @@ const TabProducts = () => {
       </div>
 
       {tabPost.length > 0 ? (
-        <div className="grid grid-cols-3 gap-6 m-4">
-          {tabPost?.slice(0, 8).map((jobPost) => (
-            <div
+        <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-4 px-4 md:px-8 lg:px-12 py-4">
+          {tabPost?.slice(0, 12).map((jobPost) => (
+            <Link
+              to={`/details/${jobPost._id}`}
               key={jobPost._id}
-              className="bg-Primary/10 p-3 rounded-md text-center space-y-1 flex flex-col"
+              className="bg-BgPrimary p-4 rounded-md space-y-1 flex flex-col"
             >
-              <h1 className="text-base font-semibold grow">{jobPost.title}</h1>
-              <h3 className="text-sm font-bold text-Red">{jobPost.category}</h3>
-              <h5>Deadline: {jobPost.deadPost}</h5>
-              <button className="bg-Secondary px-2 w-f2ll mt-2">Details</button>
-            </div>
+              <h1 className="text-xl font-bold grow">{jobPost.title}</h1>
+
+              <h2 className="text-sm text-Black/60 font-semibold">
+                CEO: {jobPost.ceoName}
+              </h2>
+
+              <h6 className="text-sm text-Black/60 font-semibold">
+                Salary: <span className="text-Red">{jobPost.salary}</span>
+              </h6>
+
+              <h6 className="text-sm text-Black/60 font-semibold">
+                Applicants Number: {jobPost.JobApplicantsNumber}
+              </h6>
+
+              <h3 className="text-sm text-Black/60 font-semibold">
+                Job Post: {jobPost.postDate}
+              </h3>
+
+              <h4 className="font-semibold">Deadline: {jobPost.deadline}</h4>
+
+              <button className="text-base font-bold text-White bg-Secondary py-1 w-full rounded-md hover:bg-Primary duration-300">
+                Details
+              </button>
+            </Link>
           ))}
         </div>
       ) : (
@@ -110,7 +136,9 @@ const TabProducts = () => {
         <Link
           to="/all-jobs"
           className={
-            tabPost.length > 8 ? "bg-Red px-2 py-2 rounded-md" : "hidden"
+            tabPost.length > 12
+              ? "text-base font-bold text-White bg-Primary w-full rounded-md hover:bg-Secondary px-4 py-2 duration-300"
+              : "hidden"
           }
         >
           All Job Post

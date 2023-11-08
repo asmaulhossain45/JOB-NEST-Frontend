@@ -3,7 +3,7 @@ import LoadingAnime from "../../public/Loading.json";
 
 const Loading = () => {
   return (
-    <div className="h-[90vh] bg-Transparent flex justify-center">
+    <div className="h-[90vh] flex justify-center">
       <Lottie animationData={LoadingAnime} loop={true} />
     </div>
   );
