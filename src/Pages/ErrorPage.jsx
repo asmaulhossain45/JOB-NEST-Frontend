@@ -1,10 +1,14 @@
 import Lottie from "lottie-react";
+import { Helmet } from "react-helmet";
 import { Link } from "react-router-dom";
 import Error404 from "../../public/Error-404.json";
 
 const ErrorPage = () => {
   return (
     <div className="relative">
+      <Helmet>
+        <title>JN | Error</title>
+      </Helmet>
       <div>
         <Lottie
           className="h-[90vh] w-full object-cover"

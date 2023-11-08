@@ -122,15 +122,53 @@ const PostDetails = () => {
   };
 
   return (
-    <div className="text-center my-10">
-      <h1>{_id}</h1>
-      <h1>{title}</h1>
-      <h1>{category}</h1>
-      <h1>{companyEmail}</h1>
-      <h1>{deadline}</h1>
-      <button onClick={handleApplyButton} className="btn bg-Red">
-        Apply
-      </button>
+    <div className="my-10 px-4 md:px-8 lg:px-12">
+      <div className="mb-4">
+        <h1 className="text-center text-Primary text-2xl md:text-4xl lg:text-5xl font-bold">
+          JOB DETAILS
+        </h1>
+      </div>
+      <div className="p-5 bg-Primary/30 rounded-md">
+        <h1 className="text-3xl font-bold mb-3">{title}</h1>
+        <div className="md:flex">
+          <div className="w-full space-y-2 font-semibold text-Black/70 text-base">
+            <img
+              className="w-full h-[20vh] object-cover rounded-md"
+              src={bannerURL}
+              alt=""
+            />
+            <h1>Category: {category}</h1>
+            <h1>Gender: {gender}</h1>
+            <h1>Job Post: {postDate}</h1>
+            <h1>Deadline: {deadline}</h1>
+            <h1>Age: {age}</h1>
+            <h1>Salary: {salary} per month</h1>
+            <h1>Experience: {experience}</h1>
+            <h1>Education: {education}</h1>
+          </div>
+          <div className="hidden md:divider md:divider-horizontal"></div>
+          <div className="w-full space-y-2 font-semibold text-Black/70 text-base mt-4 md:mt-0">
+            <img
+              className="h-[20vh] w-full object-cover rounded-md"
+              src={companyLogo}
+              alt=""
+            />
+            <h1>Company: {companyName}</h1>
+            <h1>CEO: {ceoName}</h1>
+            <h1>Email: {companyEmail}</h1>
+            <h1>Site: {companySite}</h1>
+            <h1>Location: {location}</h1>
+          </div>
+        </div>
+        <h1 className="font-semibold text-base text-Black/50 mt-2">
+          Description: {description}
+        </h1>
+        <div className="flex justify-center mt-5">
+          <button onClick={handleApplyButton} className="btn bg-Red">
+            Apply
+          </button>
+        </div>
+      </div>
 
       {/* ===== Modal Display ==== */}
       <dialog id="my_modal_5" className="modal modal-middle">

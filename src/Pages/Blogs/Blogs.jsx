@@ -1,8 +1,10 @@
+import { Helmet } from "react-helmet-async";
 import { Link, Outlet } from "react-router-dom";
 
 const Blogs = () => {
   return (
     <div className="md:grid grid-cols-4 gap-4 my-10 px-4">
+      <Helmet><title>JN | Blogs</title></Helmet>
       <div className="">
         <h1 className="text-xl md:text-2xl font-semibold mx-4 mb-4 text-Black">
           Shortcut

@@ -1,5 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
 import { useState } from "react";
+import { Helmet } from "react-helmet";
 import { Link } from "react-router-dom";
 import banner from "../../../public/Banner.jpg";
 import DataLoading from "../../Components/DataLoading";
@@ -68,6 +69,7 @@ const AllJobs = () => {
 
   return (
     <div>
+              <Helmet><title>JN | All Jobs</title></Helmet>
       {/* ===== Header ===== */}
       <div className="relative">
         <div className="absolute flex flex-col justify-center items-center h-full w-full bg-Slate/50 space-y-1 md:space-y-2">
@@ -109,7 +111,7 @@ const AllJobs = () => {
                 <tr className="bg-Slate text-White">
                   <th>Title</th>
                   <th>Date</th>
-                  <th>Salary</th>
+                  <th>Salary (per month)</th>
                   <th>Action</th>
                 </tr>
               </thead>
@@ -122,7 +124,7 @@ const AllJobs = () => {
                         <div>
                           <div className="font-bold">{jobPost.title}</div>
                           <div className="text-sm opacity-50">
-                            {jobPost.category}
+                            CEO: {jobPost.ceoName}
                           </div>
                         </div>
                       </div>
@@ -132,7 +134,7 @@ const AllJobs = () => {
                       <br />
                       <span>Post Date: {jobPost.postDate}</span>
                     </td>
-                    <td>{jobPost.SalaryRange}</td>
+                    <td>{jobPost.salary}</td>
                     <th>
                       <Link
                         to={`/details/${jobPost._id}`}

@@ -1,5 +1,6 @@
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { useContext } from "react";
+import { Helmet } from "react-helmet-async";
 import { Link } from "react-router-dom";
 import Swal from "sweetalert2";
 import DataLoading from "../../Components/DataLoading";
@@ -49,35 +50,51 @@ const MyJobs = () => {
   const myAllJob = data?.data;
 
   return (
-    <div>
-      <h1>
-        {myAllJob.length > 0 ? (
-          <div className="grid grid-cols-3 gap-6 p-3">
-            {myAllJob?.map((job) => (
-              <div key={job._id} className="bg-Primary text-White">
-                <h1>{job._id}</h1>
-                <h1>{job.title}</h1>
-                <h1>{job.category}</h1>
-                <h1>{job.email}</h1>
-                <h1>{job.deadDate}</h1>
-                <Link to={`/update-post/${job._id}`} className="btn bg-Red">
-                  Update
-                </Link>
-                <button
-                  onClick={() => {
-                    mutation.mutate(job._id);
-                  }}
-                  className="btn bg-Red"
-                >
-                  Delete
-                </button>
-              </div>
-            ))}
-          </div>
-        ) : (
-          <NoData />
-        )}
-      </h1>
+    <div className="min-h-[90vh]">
+        <Helmet><title>JN | My Job</title></Helmet>
+      {myAllJob.length > 0 ? (
+        <div className="grid grid-cols-3 gap-6 p-3">
+          {myAllJob?.map((jobPost) => (
+            <div
+              key={jobPost._id}
+              className="bg-BgPrimary p-4 rounded-md space-y-1 flex flex-col"
+            >
+              <h1 className="text-xl font-bold grow">{jobPost.title}</h1>
+
+              <h2 className="text-sm text-Black/60 font-semibold">
+                CEO: {jobPost.ceoName}
+              </h2>
+
+              <h6 className="text-sm text-Black/60 font-semibold">
+                Salary: <span className="text-Red">{jobPost.salary}</span>
+              </h6>
+
+              <h6 className="text-sm text-Black/60 font-semibold">
+                Applicants Number: {jobPost.JobApplicantsNumber}
+              </h6>
+
+              <h3 className="text-sm text-Black/60 font-semibold">
+                Job Post: {jobPost.postDate}
+              </h3>
+
+              <h4 className="font-semibold">Deadline: {jobPost.deadline}</h4>
+              <Link to={`/update-post/${jobPost._id}`} className="btn bg-Red">
+                Update
+              </Link>
+              <button
+                onClick={() => {
+                  mutation.mutate(jobPost._id);
+                }}
+                className="btn bg-Secondary"
+              >
+                Delete
+              </button>
+            </div>
+          ))}
+        </div>
+      ) : (
+        <NoData />
+      )}
     </div>
   );
 };

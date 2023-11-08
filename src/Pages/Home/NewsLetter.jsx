@@ -18,7 +18,7 @@ const NewsLetter = () => {
   };
   return (
     <div className="bg-Primary py-16 text-center text-White space-y-2">
-      <h1 className="text-lg md:text-2xl lg:text-3xl font-semibold">
+      <h1 className="text-center text-xl md:text-2xl lg:text-3xl font-bold">
         Subscribe to our Newsletter
       </h1>
       <p className="text-xs md:text-sm text-White/80 max-w-xs md:max-w-sm px-8 md:px-0 mx-auto">

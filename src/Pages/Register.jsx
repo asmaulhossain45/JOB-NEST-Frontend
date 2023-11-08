@@ -1,5 +1,6 @@
 import Lottie from "lottie-react";
 import { useContext } from "react";
+import { Helmet } from "react-helmet-async";
 import { FcGoogle } from "react-icons/fc";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
@@ -70,6 +71,9 @@ const Register = () => {
 
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 gap-6 justify-items-center content-center place-items-center min-h-[92vh] px-4">
+      <Helmet>
+        <title>JN | Register</title>
+      </Helmet>
       <div className="bg-White space-y-2 shadow-xl rounded-xl px-5 py-3 max-w-sm w-full mx-4">
         <h1 className="text-3xl text-Secondary font-bold mb-5">SIGN UP</h1>
         <form onSubmit={handleSubmit}>

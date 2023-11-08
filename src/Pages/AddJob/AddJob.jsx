@@ -88,7 +88,7 @@ const AddJob = () => {
   return (
     <div className="bg-Transparent min-h-[90vh] flex justify-center items-center my-6">
       <Helmet>
-        <title>ADD A JOB</title>
+        <title>JN | Add Job</title>
       </Helmet>
       <div className="w-11/12 md:w-3/4 mx-auto pb-12 bg-Transparent shadow-xl border-t-4 border-Secondary rounded-lg">
         <h1 className="text-center text-white text-xl md:text-3xl font-bold bg-Secondary py-2">
