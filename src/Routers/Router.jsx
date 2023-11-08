@@ -15,6 +15,7 @@ import Login from "../Pages/Login";
 import MyJobs from "../Pages/MyJobs/MyJobs";
 import UpdatePost from "../Pages/MyJobs/UpdatePost";
 import Register from "../Pages/Register";
+import PrivateRoute from "./PrivateRouters";
 
 const router = createBrowserRouter([
   {
@@ -32,19 +33,35 @@ const router = createBrowserRouter([
       },
       {
         path: `details/:id`,
-        element: <PostDetails />,
+        element: (
+          <PrivateRoute>
+            <PostDetails />
+          </PrivateRoute>
+        ),
       },
       {
         path: "/add-job",
-        element: <AddJob />,
+        element: (
+          <PrivateRoute>
+            <AddJob />
+          </PrivateRoute>
+        ),
       },
       {
         path: "/applied-jobs",
-        element: <AppliedJobs />,
+        element: (
+          <PrivateRoute>
+            <AppliedJobs />
+          </PrivateRoute>
+        ),
       },
       {
         path: "/my-jobs",
-        element: <MyJobs />,
+        element: (
+          <PrivateRoute>
+            <MyJobs />
+          </PrivateRoute>
+        ),
       },
       {
         path: "/update-post/:id",

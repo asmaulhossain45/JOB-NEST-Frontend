@@ -8,9 +8,8 @@ import Loading from "./Loading";
 
 const PostDetails = () => {
   const { user } = useContext(AuthContext);
-  const deadlineDate = new Date("2023-10-31");
+  const userEmail = user.email;
   const navigate = useNavigate();
-  const today = new Date();
   const axios = useAxios();
   const { id } = useParams();
 
@@ -51,15 +50,20 @@ const PostDetails = () => {
     description,
   } = data.data;
 
+  // formatted Today Date
+  const today = new Date();
+  const split = deadline.split("-");
+  const FormattedDeadline = new Date(split[2], split[1] - 1, split[0]);
+
   const handleApplyButton = () => {
-    if ("h@example.com" === companyEmail) {
+    if (userEmail === companyEmail) {
       return Swal.fire({
         icon: "error",
         title: "Sorry!!!",
         text: "You Can't Apply Your Own Job",
       });
     }
-    if (deadlineDate > today) {
+    if (FormattedDeadline < today) {
       return Swal.fire({
         icon: "error",
         title: "Sorry!!!",
@@ -97,7 +101,6 @@ const PostDetails = () => {
       education,
       description,
     };
-    console.log(applicantsInfo);
     try {
       await axios.post("applications", applicantsInfo).then((res) => {
         console.log(res);

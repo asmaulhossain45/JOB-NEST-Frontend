@@ -1,9 +1,11 @@
 import { Squash as Hamburger } from "hamburger-react";
 import { useContext, useState } from "react";
 import { Link, NavLink, useNavigate } from "react-router-dom";
+import useAxios from "../CustomHooks/useAxios";
 import { AuthContext } from "../Providers/AuthProvider";
 
 const Navbar = () => {
+  const axios = useAxios();
   const [isOpen, setOpen] = useState(false);
   const navigate = useNavigate();
   const { user, handleLogOut } = useContext(AuthContext);
@@ -11,6 +13,9 @@ const Navbar = () => {
 
   const handleLogOutButton = () => {
     handleLogOut();
+    axios.post("clear").then((res) => {
+      console.log(res.data);
+    });
     navigate("/");
   };
 
@@ -95,6 +100,7 @@ const Navbar = () => {
                         ? user.photoURL
                         : "https://i.ibb.co/XSZJkg3/Default-pfp-svg.png"
                     }
+                    referrerPolicy="no-referrer"
                   />
                 </div>
               </label>

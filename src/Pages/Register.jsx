@@ -1,14 +1,21 @@
 import Lottie from "lottie-react";
 import { useContext } from "react";
-import { FaFacebookF, FaGoogle, FaTwitter } from "react-icons/fa";
-import { Link, useNavigate } from "react-router-dom";
+import { FcGoogle } from "react-icons/fc";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 import signPage from "../../public/SignPage.json";
 import { AuthContext } from "../Providers/AuthProvider";
 
 const Register = () => {
-  const { createUser, updateUser, user, handleLogOut, setLoading } =
-    useContext(AuthContext);
+  const {
+    createUser,
+    userGoogleLogin,
+    updateUser,
+    user,
+    handleLogOut,
+    setLoading,
+  } = useContext(AuthContext);
+  const location = useLocation();
   const navigate = useNavigate();
 
   const handleSubmit = async (event) => {
@@ -42,11 +49,22 @@ const Register = () => {
   };
 
   // ===== Google Login =====
-  const handleGoogleLogin = () => {};
-  // ===== Facebook Login =====
-  const handleFacebookLogin = () => {};
-  // ===== Twitter Login =====
-  const handleTwitterLogin = () => {};
+  const handleGoogleLogin = () => {
+    userGoogleLogin()
+      .then(() => {
+        navigate(location?.state ? location?.state : "/");
+        Swal.fire({
+          position: "center",
+          icon: "success",
+          title: "Login Successful.",
+          showConfirmButton: false,
+          timer: 1500,
+        });
+      })
+      .catch((error) => {
+        // setError(error.message);
+      });
+  };
 
   console.log(user);
 
@@ -122,30 +140,13 @@ const Register = () => {
             Login
           </Link>
         </p>
-        <div className="py-2">
-          <h1 className="text-center text-base font-bold">LOGIN WITH</h1>
-          <div className="flex justify-center items-center gap-2 mt-1">
-            <button
-              onClick={handleFacebookLogin}
-              className="bg-Secondary text-White p-2 rounded-full hover:scale-110 duration-300"
-            >
-              <FaFacebookF />
-            </button>
-
-            <button
-              onClick={handleGoogleLogin}
-              className="bg-Secondary text-White p-2 rounded-full hover:scale-110 duration-300"
-            >
-              <FaGoogle />
-            </button>
-
-            <button
-              onClick={handleTwitterLogin}
-              className="bg-Secondary text-White p-2 rounded-full hover:scale-110 duration-300"
-            >
-              <FaTwitter />
-            </button>
-          </div>
+        <div className="flex justify-center py-2 w-full">
+          <button
+            onClick={handleGoogleLogin}
+            className="w-full flex items-center justify-center gap-1 text-lg font-semibold text-White py-1 bg-Slate rounded-md hover:scale-95 duration-300"
+          >
+            <FcGoogle size={22} /> Login With Google
+          </button>
         </div>
       </div>
 

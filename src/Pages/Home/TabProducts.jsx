@@ -3,6 +3,7 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 import "react-tabs/style/react-tabs.css";
 import DataLoading from "../../Components/DataLoading";
+import NoData from "../../Components/NoData";
 import useAxios from "../../CustomHooks/useAxios";
 
 const TabProducts = () => {
@@ -47,16 +48,6 @@ const TabProducts = () => {
           All-Jobs
         </button>
         <button
-          onClick={() => handleTabButton("Remote")}
-          className={
-            selectedTab === "Remote"
-              ? "bg-Slate/10 font-semibold px-2 py-2"
-              : "font-semibold px-2 py-2"
-          }
-        >
-          Remote
-        </button>
-        <button
           onClick={() => handleTabButton("On Site")}
           className={
             selectedTab === "On Site"
@@ -65,6 +56,16 @@ const TabProducts = () => {
           }
         >
           Onsite
+        </button>
+        <button
+          onClick={() => handleTabButton("Remote")}
+          className={
+            selectedTab === "Remote"
+              ? "bg-Slate/10 font-semibold px-2 py-2"
+              : "font-semibold px-2 py-2"
+          }
+        >
+          Remote
         </button>
         <button
           onClick={() => handleTabButton("Hybrid")}
@@ -88,19 +89,23 @@ const TabProducts = () => {
         </button>
       </div>
 
-      <div className="grid grid-cols-3 gap-6 m-4">
-        {tabPost?.slice(0, 8).map((jobPost) => (
-          <div
-            key={jobPost._id}
-            className="bg-Primary/10 p-3 rounded-md text-center space-y-1 flex flex-col"
-          >
-            <h1 className="text-base font-semibold grow">{jobPost.title}</h1>
-            <h3 className="text-sm font-bold text-Red">{jobPost.category}</h3>
-            <h5>Deadline: {jobPost.deadPost}</h5>
-            <button className="bg-Secondary px-2 w-f2ll mt-2">Details</button>
-          </div>
-        ))}
-      </div>
+      {tabPost.length > 0 ? (
+        <div className="grid grid-cols-3 gap-6 m-4">
+          {tabPost?.slice(0, 8).map((jobPost) => (
+            <div
+              key={jobPost._id}
+              className="bg-Primary/10 p-3 rounded-md text-center space-y-1 flex flex-col"
+            >
+              <h1 className="text-base font-semibold grow">{jobPost.title}</h1>
+              <h3 className="text-sm font-bold text-Red">{jobPost.category}</h3>
+              <h5>Deadline: {jobPost.deadPost}</h5>
+              <button className="bg-Secondary px-2 w-f2ll mt-2">Details</button>
+            </div>
+          ))}
+        </div>
+      ) : (
+        <NoData />
+      )}
       <div className="w-full text-center">
         <Link
           to="/all-jobs"

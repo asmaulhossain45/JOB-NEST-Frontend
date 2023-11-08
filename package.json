@@ -12,8 +12,10 @@
   "dependencies": {
     "@tanstack/react-query": "^5.7.2",
     "axios": "^1.6.0",
+    "cookie-parser": "^1.4.6",
     "firebase": "^10.5.2",
     "hamburger-react": "^2.5.0",
+    "jsonwebtoken": "^9.0.2",
     "localforage": "^1.10.0",
     "lottie-react": "^2.4.0",
     "match-sorter": "^6.3.1",

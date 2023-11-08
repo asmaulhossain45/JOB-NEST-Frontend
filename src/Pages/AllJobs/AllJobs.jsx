@@ -11,7 +11,7 @@ const AllJobs = () => {
   const [searchText, setSearchText] = useState("");
   const [page, setPage] = useState(1);
   const [activePage, setActivePage] = useState(page);
-  const limit = 3;
+  const limit = 8;
 
   // Search Job By Title
   const handleSearchButton = (event) => {
@@ -122,13 +122,13 @@ const AllJobs = () => {
                         <div>
                           <div className="font-bold">{jobPost.title}</div>
                           <div className="text-sm opacity-50">
-                            {jobPost.userName}
+                            {jobPost.category}
                           </div>
                         </div>
                       </div>
                     </td>
                     <td>
-                      Deadline: {jobPost.deadDate}
+                      Deadline: {jobPost.deadline}
                       <br />
                       <span>Post Date: {jobPost.postDate}</span>
                     </td>
