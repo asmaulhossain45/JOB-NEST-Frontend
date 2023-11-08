@@ -103,7 +103,7 @@ const TabProducts = () => {
               key={jobPost._id}
               className="bg-BgPrimary p-4 rounded-md space-y-1 flex flex-col"
             >
-              <h1 className="text-xl font-bold grow">{jobPost.title}</h1>
+              <h1 className="text-xl font-bold grow">{jobPost.title}</h1> <hr className="py-1" />
 
               <h2 className="text-sm text-Black/60 font-semibold">
                 CEO: {jobPost.ceoName}

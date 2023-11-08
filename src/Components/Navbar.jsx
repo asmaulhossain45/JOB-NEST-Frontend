@@ -90,25 +90,27 @@ const Navbar = () => {
         {/* ----- User Login or Log Out ------ */}
         {user ? (
           <div className="dropdown dropdown-end">
-            <label tabIndex={0} className="avatar">
-              <div className="h-6 rounded-full  border border-Primary">
-                <img
-                  onClick={() => setProfileToggle(!profileToggle)}
-                  className=""
-                  src={
-                    user.photoURL
-                      ? user.photoURL
-                      : "https://i.ibb.co/XSZJkg3/Default-pfp-svg.png"
-                  }
-                  referrerPolicy="no-referrer"
-                />
-              </div>
-            </label>
+            <div
+              tabIndex={0}
+              data-tip={user.displayName}
+              className="h-6 tooltip tooltip-left "
+            >
+              <img
+                onClick={() => setProfileToggle(!profileToggle)}
+                className="h-6 rounded-full  border border-Primary"
+                src={
+                  user.photoURL
+                    ? user.photoURL
+                    : "https://i.ibb.co/XSZJkg3/Default-pfp-svg.png"
+                }
+                referrerPolicy="no-referrer"
+              />
+            </div>
             <ul
               tabIndex={0}
               className={`${
                 profileToggle ? "" : "hidden"
-              } menu absolute right-0 menu-sm dropdown-content mt-3 z-[1] px-3 bg-White py-4 rounded-s-xl w-52 flex flex-col justify-center`}
+              } menu fixed menu-sm dropdown-content z-[1] mt-2 px-3 bg-White py-4 rounded-b-xl w-52 flex flex-col justify-center`}
             >
               <div className="flex justify-center mb-2">
                 <img

@@ -37,12 +37,16 @@ const AppliedJobs = () => {
     return console.log(error.message);
   }
   const appliedJob = data?.data;
-  console.log(appliedJob);
+
+
+
   return (
     <div className="min-h-[90vh]">
       <Helmet>
         <title>JN | Applied Job</title>
       </Helmet>
+
+      {/* ============================= */}
       <div className="flex items-center gap-2 text-lg font-bold text-White justify-end bg-Slate py-1 px-4 md:px-8 lg:px-12">
         Filter:
         <select
@@ -59,6 +63,7 @@ const AppliedJobs = () => {
           <option>Part Time</option>
         </select>
       </div>
+      {/* ========================== */}
       <div>
         {appliedJob.length > 0 ? (
           <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-4 px-4 md:px-8 lg:px-12 py-4">
@@ -67,7 +72,7 @@ const AppliedJobs = () => {
                 key={job._id}
                 className="bg-BgPrimary p-4 rounded-md space-y-1 flex flex-col"
               >
-                <h1 className="text-xl font-bold grow">{job.title}</h1>
+                <h1 className="text-xl font-bold grow">{job.title}</h1> <hr className="py-1" />
 
                 <h2 className="text-sm text-Black/60 font-semibold">
                   CEO: {job.ceoName}

@@ -107,6 +107,7 @@ const AddJob = () => {
                 className="bg-transparent border-2 border-Black/30 outline-0 px-3 py-1 rounded-md w-full"
                 type="text"
                 name="title"
+                required
                 placeholder="Web Developer"
                 id="1"
               />
@@ -134,6 +135,7 @@ const AddJob = () => {
                 className="bg-transparent border-2 border-Black/30 outline-0 px-3 py-1 rounded-md w-full"
                 type="text"
                 name="companyName"
+                required
                 placeholder="Webiots Cloud"
                 id="3"
               />
@@ -146,6 +148,7 @@ const AddJob = () => {
                 className="bg-transparent border-2 border-Black/30 outline-0 pl-3 py-1 rounded-md w-full"
                 type="url"
                 name="companySite"
+                required
                 placeholder="https://www.example.jpg"
                 id="4"
               />
@@ -160,6 +163,7 @@ const AddJob = () => {
                 className="bg-transparent border-2 border-Black/30 outline-0 px-3 py-1 rounded-md w-full"
                 type="text"
                 name="location"
+                required
                 placeholder="New-York, USA"
                 id="5"
               />
@@ -172,6 +176,7 @@ const AddJob = () => {
                 className="bg-transparent border-2 border-Black/30 outline-0 pl-3 py-1 rounded-md w-full"
                 type="url"
                 name="companyLogo"
+                required
                 placeholder="https://www.companyLogo.png"
                 id="6"
               />
@@ -186,6 +191,7 @@ const AddJob = () => {
               <select
                 className="bg-transparent border-2 border-Black/30 outline-0 px-3 py-1 rounded-md w-full"
                 name="category"
+                required
                 id="7"
               >
                 <option selected disabled>
@@ -204,6 +210,7 @@ const AddJob = () => {
               <select
                 className="bg-transparent border-2 border-Black/30 outline-0 px-3 py-1 rounded-md w-full"
                 name="gender"
+                required
                 id="8"
               >
                 <option selected disabled>
@@ -226,6 +233,7 @@ const AddJob = () => {
                 type="url"
                 name="bannerURL"
                 placeholder="https://www.banner.jpg"
+                required
                 id="9"
               />
             </div>
@@ -271,6 +279,7 @@ const AddJob = () => {
                 type="text"
                 name="age"
                 placeholder="22 - 30"
+                required
                 id="12"
               />
             </div>
@@ -283,6 +292,7 @@ const AddJob = () => {
                 type="text"
                 name="salary"
                 placeholder="25k - 35k"
+                required
                 id="13"
               />
             </div>
@@ -297,6 +307,7 @@ const AddJob = () => {
                 type="number"
                 name="experience"
                 placeholder="1"
+                required
                 id="14"
               />
             </div>
@@ -309,6 +320,7 @@ const AddJob = () => {
                 type="text"
                 name="education"
                 placeholder="Bachelor's Degree"
+                required
                 id="15"
               />
             </div>
@@ -322,6 +334,7 @@ const AddJob = () => {
                 className="bg-transparent border-2 border-Black/30 outline-0 px-3 py-1 rounded-md w-full"
                 name="description"
                 placeholder="Description"
+                required
                 id="16"
                 rows="5"
               ></textarea>

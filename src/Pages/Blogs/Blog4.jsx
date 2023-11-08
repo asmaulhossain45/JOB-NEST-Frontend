@@ -15,6 +15,10 @@ const Blog4 = () => {
           Server-side rendering and enhanced SEO. It has some additional
           features such as data fetching utilities, dynamic API routes,
         </p>
+
+        <div className="tooltip tooltip-bottom" data-tip="Hello">
+          <img src="asd" alt="sss" />
+        </div>
       </div>
     </div>
   );
