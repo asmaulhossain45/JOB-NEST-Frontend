@@ -1,8 +1,10 @@
 import Lottie from "lottie-react";
-import { useContext, useState } from "react";
+import { useContext } from "react";
 import { Helmet } from "react-helmet-async";
 import { FcGoogle } from "react-icons/fc";
 import { Link, useLocation, useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import Swal from "sweetalert2";
 import signPage from "../../public/SignPage.json";
 import { AuthContext } from "../Providers/AuthProvider";
@@ -10,12 +12,10 @@ import { AuthContext } from "../Providers/AuthProvider";
 const Login = () => {
   const { user, userGoogleLogin, loginUser, setLoading } =
     useContext(AuthContext);
-  const [error, setError] = useState(null);
   const navigate = useNavigate();
   const location = useLocation();
 
   const handleSubmit = async (event) => {
-    setError(null);
     event.preventDefault();
     const form = event.target;
     const email = form.email.value;
@@ -37,8 +37,18 @@ const Login = () => {
         });
       });
     } catch (error) {
-      console.log(error);
+      const message = error.message;
       setLoading(false);
+      toast.error(message, {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+      });
     }
   };
 
@@ -56,7 +66,18 @@ const Login = () => {
         });
       })
       .catch((error) => {
-        setError(error.message);
+        const message = error.message;
+        setLoading(false);
+        toast.error(message, {
+          position: "top-right",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "light",
+        });
       });
   };
 
@@ -64,7 +85,9 @@ const Login = () => {
 
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 gap-6 justify-items-center content-center place-items-center min-h-[92vh] px-4">
-      <Helmet><title>JN | Login</title></Helmet>
+      <Helmet>
+        <title>JN | Login</title>
+      </Helmet>
       <div className="bg-White space-y-2 shadow-xl rounded-xl px-5 py-3 max-w-sm w-full mx-4">
         <h1 className="text-3xl text-Secondary font-bold mb-5">SIGN IN</h1>
         <form onSubmit={handleSubmit}>

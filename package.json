@@ -33,6 +33,7 @@
     "react-tabs": "^6.0.2",
     "react-to-pdf": "^1.0.1",
     "react-toastify": "^9.1.3",
+    "react-tooltip": "^5.22.0",
     "reoverlay": "^1.0.3",
     "sort-by": "^1.2.0",
     "styled-components": "^4.0.0",

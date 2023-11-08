@@ -3,6 +3,8 @@ import { useContext } from "react";
 import { Helmet } from "react-helmet-async";
 import { FcGoogle } from "react-icons/fc";
 import { Link, useLocation, useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import Swal from "sweetalert2";
 import signPage from "../../public/SignPage.json";
 import { AuthContext } from "../Providers/AuthProvider";
@@ -12,7 +14,6 @@ const Register = () => {
     createUser,
     userGoogleLogin,
     updateUser,
-    user,
     handleLogOut,
     setLoading,
   } = useContext(AuthContext);
@@ -46,6 +47,18 @@ const Register = () => {
     } catch (error) {
       console.log(error);
       setLoading(false);
+      const message = error.message;
+      setLoading(false);
+      toast.error(message, {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+      });
     }
   };
 
@@ -63,11 +76,20 @@ const Register = () => {
         });
       })
       .catch((error) => {
-        // setError(error.message);
+        const message = error.message;
+        setLoading(false);
+        toast.error(message, {
+          position: "top-right",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "light",
+        });
       });
   };
-
-  console.log(user);
 
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 gap-6 justify-items-center content-center place-items-center min-h-[92vh] px-4">

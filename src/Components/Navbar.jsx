@@ -1,6 +1,7 @@
 import { Squash as Hamburger } from "hamburger-react";
 import { useContext, useState } from "react";
 import { Link, NavLink, useNavigate } from "react-router-dom";
+import "react-tooltip/dist/react-tooltip.css";
 import useAxios from "../CustomHooks/useAxios";
 import { AuthContext } from "../Providers/AuthProvider";
 
