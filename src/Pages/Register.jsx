@@ -10,13 +10,8 @@ import signPage from "../../public/SignPage.json";
 import { AuthContext } from "../Providers/AuthProvider";
 
 const Register = () => {
-  const {
-    createUser,
-    userGoogleLogin,
-    updateUser,
-    handleLogOut,
-    setLoading,
-  } = useContext(AuthContext);
+  const { createUser, userGoogleLogin, updateUser, handleLogOut, setLoading } =
+    useContext(AuthContext);
   const location = useLocation();
   const navigate = useNavigate();
 
@@ -27,8 +22,44 @@ const Register = () => {
     const photoURL = form.photoURL.value;
     const email = form.email.value;
     const password = form.password.value;
-    const userInfo = { name, photoURL, email, password };
-    console.log(userInfo);
+
+    if (password.length < 6) {
+      toast.error("Password should be at least 6 characters", {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+      });
+      return;
+    } else if (!/[A-Z]/.test(password)) {
+      toast.error("Use at least one Upper-Case later", {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+      });
+      return;
+    } else if (!/[!@#$%&*+.?~=]/.test(password)) {
+      toast.error("Use at least one special character", {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+      });
+      return;
+    }
 
     // Create Account with Email & Password
     try {
@@ -45,7 +76,6 @@ const Register = () => {
         timer: 1500,
       });
     } catch (error) {
-      console.log(error);
       setLoading(false);
       const message = error.message;
       setLoading(false);

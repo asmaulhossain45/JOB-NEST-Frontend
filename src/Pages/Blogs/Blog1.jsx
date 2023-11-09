@@ -1,10 +1,6 @@
 const Blog1 = () => {
   return (
     <div>
-      <img className="w-full mb-4"
-        src="https://stytch.com/blog/wp-content/uploads/2022/01/How-a-refresh-token-is-generated-and-used-1-1024x539.png"
-        alt="blog1"
-      />
       <h1 className="text-lg text-Black font-semibold">
         What Are Access and Refresh Tokens?
       </h1>
@@ -14,6 +10,11 @@ const Blog1 = () => {
           keeping session data on the server. Tokens are data confirming a
           user’s identity and are analogous to digital signatures.
         </p>
+        <img
+          className="w-full mb-4"
+          src="https://stytch.com/blog/wp-content/uploads/2022/01/How-a-refresh-token-is-generated-and-used-1-1024x539.png"
+          alt="blog1"
+        />
 
         <h1 className="text-lg text-Black font-semibold">Access Token:</h1>
 

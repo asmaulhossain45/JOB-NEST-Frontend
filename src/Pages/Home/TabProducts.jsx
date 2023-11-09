@@ -1,5 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
-import { useState } from "react";
+import AOS from "aos";
+import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import "react-tabs/style/react-tabs.css";
 import DataLoading from "../../Components/DataLoading";
@@ -9,6 +10,10 @@ import useAxios from "../../CustomHooks/useAxios";
 const TabProducts = () => {
   const axios = useAxios();
   const [selectedTab, setSelectedTab] = useState("");
+
+  useEffect(() => {
+    AOS.init({ duration: 1000 });
+  });
 
   const tabPosts = async () => {
     const res = await axios.get(`allJobPost?category=${selectedTab}`);
@@ -97,7 +102,7 @@ const TabProducts = () => {
       {tabPost.length > 0 ? (
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4 px-4 md:px-8 lg:px-12 py-4">
           {tabPost?.slice(0, 8).map((jobPost) => (
-            <Link
+            <Link data-aos="fade-up"
               to={`/details/${jobPost._id}`}
               key={jobPost._id}
               className="bg-BgPrimary border-2 border-BgPrimary p-4 rounded-md flex gap-6 justify-between items-center hover:border-Primary duration-500"

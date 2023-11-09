@@ -23,32 +23,42 @@ const Navbar = () => {
   const NavLinks = (
     <>
       <li>
-        <NavLink className={`[&.active]:border-b-2`} to="/">
+        <NavLink className={`[&.active]:border-b-2 px-2`} to="/">
           Home
         </NavLink>
       </li>
       <li>
-        <NavLink className={`[&.active]:border-b-2`} to="/all-jobs">
+        <NavLink className={`[&.active]:border-b-2 px-2`} to="/all-jobs">
           All Jobs
         </NavLink>
       </li>
       <li>
-        <NavLink className={`[&.active]:border-b-2`} to="/add-job">
+        <NavLink
+          className={user ? "[&.active]:border-b-2 px-2" : "hidden "}
+          to="/add-job"
+        >
           Add Job
         </NavLink>
       </li>
       <li>
-        <NavLink className={`[&.active]:border-b-2`} to="/applied-jobs">
-          Applied Job
-        </NavLink>
-      </li>
-      <li>
-        <NavLink className={`[&.active]:border-b-2`} to="/my-jobs">
+        <NavLink
+          className={user ? "[&.active]:border-b-2 px-2" : "hidden"}
+          to="/my-jobs"
+        >
           My Jobs
         </NavLink>
       </li>
       <li>
-        <NavLink className={`[&.active]:border-b-2`} to="/blogs">
+        <NavLink
+          className={user ? "[&.active]:border-b-2 px-2" : "hidden"}
+          to="/applied-jobs"
+        >
+          Applied Job
+        </NavLink>
+      </li>
+
+      <li>
+        <NavLink className={`[&.active]:border-b-2 px-2`} to="/blogs">
           Blogs
         </NavLink>
       </li>
@@ -64,7 +74,7 @@ const Navbar = () => {
           {isOpen ? (
             <ul
               onClick={() => setOpen(!isOpen)}
-              className="absolute bg-White left-0 px-6 py-4 space-y-1 text-lg border-t-2 font-semibold w-full"
+              className="absolute bg-White left-0 px-6 py-4 space-y-1 border-b-2 text-lg border-t-2 font-semibold w-full"
             >
               {NavLinks}
             </ul>
@@ -83,7 +93,7 @@ const Navbar = () => {
 
       {/* ----- Nav End ----- */}
       <div className="flex justify-center items-center gap-4">
-        <ul className="hidden md:flex justify-center items-center gap-3 text-sm font-semibold text-Primary">
+        <ul className="hidden md:flex justify-center items-center text-sm font-semibold text-Primary">
           {NavLinks}
         </ul>
 

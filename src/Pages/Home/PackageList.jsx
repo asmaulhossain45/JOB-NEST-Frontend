@@ -1,4 +1,8 @@
+
+
 const PackageList = () => {
+
+
   return (
     <div className="px-4 md:px-8 lg:px-12">
       <div className="text-center">
@@ -12,7 +16,7 @@ const PackageList = () => {
         </p>
       </div>
       <div className="space-y-6 md:space-y-0 grid grid-cols-1 md:grid-cols-3 md:gap-4 lg:gap-12">
-        <div className="bg-BgPrimary text-center shadow-lg hover:shadow-Secondary duration-300">
+        <div  data-aos="flip-up" className="bg-BgPrimary text-center shadow-lg hover:shadow-Secondary duration-300">
           <div className="space-y-5 py-10 bg-Secondary">
             <h1 className="text-4xl md:text-3xl lg:text-4xl font-bold text-White">BASIC</h1>
             <h1 className="text-2xl md:text-xl lg:text-2xl font-semibold text-White">

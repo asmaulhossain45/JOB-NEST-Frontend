@@ -1,11 +1,6 @@
 const Blog3 = () => {
   return (
     <div>
-      <img
-        className="w-full mb-4"
-        src="https://teacode.io/wp-content/uploads/2022/06/Copy-of-AWS-Amplify-blog-compress.png"
-        alt="Express Js"
-      />
       <h1 className="text-lg text-Black font-semibold">What Is Next.js?</h1>
 
       <div className="space-y-2 text-sm text-Slate/80">
@@ -23,6 +18,11 @@ const Blog3 = () => {
           better on searches the inbuilt features of Next.js provide support for
           that functions.
         </p>
+        <img
+          className="w-full mb-4"
+          src="https://teacode.io/wp-content/uploads/2022/06/Copy-of-AWS-Amplify-blog-compress.png"
+          alt="Express Js"
+        />
         <h1 className="text-lg text-Black font-semibold">Why Next.js:</h1>
         <p>
           You would be wondering if Next.js require some basic knowledge of

@@ -173,7 +173,7 @@ const PostDetails = () => {
       {/* ===== Modal Display ==== */}
       <dialog id="my_modal_5" className="modal modal-middle">
         <div className="modal-box p-0">
-          <h3 className="bg-Secondary font-bold text-xl py-2">
+          <h3 className="bg-Secondary text-center font-bold text-xl py-2">
             Submit Application
           </h3>
           <form onSubmit={handleSubmitButton} className="space-y-4 p-5">
@@ -201,11 +201,13 @@ const PostDetails = () => {
               required
             />
 
-            <input
-              className="bg-Secondary text-Black hover:bg-Primary hover:text-White text-lg font-semibold px-4 py-2 rounded-md duration-300"
-              type="submit"
-              value="Submit"
-            />
+            <div className="flex justify-center items-center">
+              <input
+                className="bg-Secondary text-Black hover:bg-Primary hover:text-White text-lg font-semibold px-4 py-2 rounded-md duration-300"
+                type="submit"
+                value="Submit"
+              />
+            </div>
           </form>
           <form method="dialog">
             <button className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">

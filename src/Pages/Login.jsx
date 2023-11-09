@@ -99,7 +99,6 @@ const Login = () => {
               type="email"
               name="email"
               placeholder="email@example.com"
-              defaultValue="asmaulhossain@gmail.com"
               required
             />
           </div>
@@ -112,7 +111,6 @@ const Login = () => {
               type="password"
               name="password"
               placeholder="*********"
-              defaultValue="123456"
               required
             />
           </div>

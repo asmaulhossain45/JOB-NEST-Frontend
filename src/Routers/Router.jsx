@@ -73,6 +73,10 @@ const router = createBrowserRouter([
         children: [
           {
             index: true,
+            element: <Blog4 />,
+          },
+          {
+            path: "blog/access-refresh",
             element: <Blog1 />,
           },
           {
@@ -83,10 +87,7 @@ const router = createBrowserRouter([
             path: "blog/next-js",
             element: <Blog3 />,
           },
-          {
-            path: "blog/site-view",
-            element: <Blog4 />,
-          },
+
         ],
       },
       {

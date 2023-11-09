@@ -1,10 +1,6 @@
 const Blog2 = () => {
   return (
     <div>
- <img className="w-full mb-4"
-        src="https://img-c.udemycdn.com/course/750x422/4422780_304c_2.jpg"
-        alt="Express Js"
-      />
       <h1 className="text-lg text-Black font-semibold">What Is Express.js?</h1>
 
       <div className="space-y-2 text-sm text-Slate/80">
@@ -16,6 +12,11 @@ const Blog2 = () => {
           framework by developing more powerful components and parts depending
           on your application use cases.
         </p>
+        <img
+          className="w-full mb-4"
+          src="https://img-c.udemycdn.com/course/750x422/4422780_304c_2.jpg"
+          alt="Express Js"
+        />
         <h1 className="text-lg text-Black font-semibold">
           Single-Page Applications
         </h1>
