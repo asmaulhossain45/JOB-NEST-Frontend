@@ -3,20 +3,20 @@ import { Link } from "react-router-dom";
 const Footer = () => {
   return (
     <footer>
-      <div className="grid grid-cols-3 justify-items-center bg-Slate text-White px-4 py-10">
+      <div className="text-center space-y-5 md:space-y-0 md:grid grid-cols-3 justify-items-center bg-Slate text-White px-4 py-10">
         <div className="flex flex-col space-y-2">
-          <header className="footer-title opacity-100">
+          <header className="footer-title flex justify-center opacity-100">
             <Link to="/">
               <img
-                className="w-16 md:w-24"
+                className="w-28 md:w-24"
                 src="https://i.ibb.co/znt07n6/Logo.png"
                 alt=""
               />
             </Link>
           </header>
-          <a className="link link-hover">+945157695</a>
-          <a className="link link-hover">job@nest.co</a>
-          <a className="link link-hover">Bangladesh</a>
+          <a className="link link-hover">+8801234567899</a>
+          <a className="link link-hover">jobnest@gmail.com</a>
+          <a className="link link-hover">Rajshahi, Bangladesh</a>
         </div>
         <nav className="flex flex-col space-y-2">
           <header className="footer-title">Social</header>

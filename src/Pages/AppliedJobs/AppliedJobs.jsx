@@ -38,8 +38,6 @@ const AppliedJobs = () => {
   }
   const appliedJob = data?.data;
 
-
-
   return (
     <div className="min-h-[90vh]">
       <Helmet>
@@ -66,40 +64,59 @@ const AppliedJobs = () => {
       {/* ========================== */}
       <div>
         {appliedJob.length > 0 ? (
-          <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-4 px-4 md:px-8 lg:px-12 py-4">
-            {appliedJob?.map((job) => (
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 px-4 md:px-8 lg:px-12 py-4">
+            {appliedJob?.map((jobPost) => (
               <div
-                key={job._id}
-                className="bg-BgPrimary p-4 rounded-md space-y-1 flex flex-col"
+                to={`/details/${jobPost._id}`}
+                key={jobPost._id}
+                className="bg-BgPrimary p-4 rounded-md flex gap-6 justify-between items-center"
               >
-                <h1 className="text-xl font-bold grow">{job.title}</h1> <hr className="py-1" />
+                <div className="hidden lg:block w-1/4">
+                  <img
+                    className="h-full rounded-md w-full object-cover"
+                    src={jobPost.companyLogo}
+                    alt=""
+                  />
+                </div>
 
-                <h2 className="text-sm text-Black/60 font-semibold">
-                  CEO: {job.ceoName}
-                </h2>
+                <div className="w-full lg:w-3/4">
+                  <h1 className="text-base font-bold grow">{jobPost.title}</h1>
 
-                <h6 className="text-sm text-Black/60 font-semibold">
-                  Salary: <span className="text-Red">{job.salary}</span>
-                </h6>
+                  <div className="flex justify-between items-center mb-1">
+                    <h2 className="text-sm font-semibold text-Black/60">
+                      CEO: {jobPost.ceoName}
+                    </h2>
 
-                <h6 className="text-sm text-Black/60 font-semibold">
-                  Applicants Number: {job.JobApplicantsNumber}
-                </h6>
+                    <p className="bg-Secondary text-White px-2 py-1 text-xs rounded-sm font-semibold inline-block">
+                      {jobPost.category}
+                    </p>
+                  </div>
 
-                <h3 className="text-sm text-Black/60 font-semibold">
-                  Job Post: {job.postDate}
-                </h3>
+                  <hr />
 
-                <h4 className="font-semibold">Deadline: {job.deadline}</h4>
+                  <div className="flex justify-between items-center text-xs font-semibold text-Black/60 my-1">
+                    <div className="space-y-1">
+                      <h6>Applicants Number: {jobPost.JobApplicantsNumber}</h6>
 
-                <button
-                  className="text-base font-bold text-White bg-Secondary py-1 w-full rounded-md hover:bg-Primary duration-300"
-                  onClick={() =>
-                    document.getElementById("my_modal_3").showModal()
-                  }
-                >
-                  Download Pdf
-                </button>
+                      <h6>Salary: {jobPost.salary}</h6>
+                    </div>
+
+                    <div className="space-y-1">
+                      <h3>Job Post: {jobPost.postDate}</h3>
+
+                      <h4>Deadline: {jobPost.deadline}</h4>
+                    </div>
+                  </div>
+
+                  <button
+                    onClick={() =>
+                      document.getElementById("my_modal_3").showModal()
+                    }
+                    className="text-base font-bold text-White bg-Secondary py-1 w-full rounded-md hover:bg-Primary duration-300"
+                  >
+                    Download Pdf
+                  </button>
+                </div>
 
                 {/* ==== Modal View ==== */}
                 <dialog id="my_modal_3" className="modal">
@@ -112,30 +129,32 @@ const AppliedJobs = () => {
 
                     {/* ==== Modal data ===== */}
                     <div ref={targetRef} className="p-5 bg-Primary/30">
-                      <h1 className="text-lg font-bold">Title: {job.title}</h1>
+                      <h1 className="text-lg font-bold">
+                        Title: {jobPost.title}
+                      </h1>
                       <div className="space-y-2 font-semibold text-Black/70 text-base">
-                        <h1>Category: {job.category}</h1>
-                        <h1>Gender: {job.gender}</h1>
-                        <h1>Job Post: {job.postDate}</h1>
-                        <h1>Deadline: {job.deadline}</h1>
-                        <h1>Age: {job.age}</h1>
-                        <h1>Salary: {job.salary} per month</h1>
-                        <h1>Experience: {job.experience}</h1>
-                        <h1>Education: {job.education}</h1>
-                        <h1>Company: {job.companyName}</h1>
-                        <h1>CEO: {job.ceoName}</h1>
-                        <h1>Email: {job.companyEmail}</h1>
-                        <h1>Site: {job.companySite}</h1>
-                        <h1>Location: {job.location}</h1>
+                        <h1>Category: {jobPost.category}</h1>
+                        <h1>Gender: {jobPost.gender}</h1>
+                        <h1>Job Post: {jobPost.postDate}</h1>
+                        <h1>Deadline: {jobPost.deadline}</h1>
+                        <h1>Age: {jobPost.age}</h1>
+                        <h1>Salary: {jobPost.salary} per month</h1>
+                        <h1>Experience: {jobPost.experience}</h1>
+                        <h1>Education: {jobPost.education}</h1>
+                        <h1>Company: {jobPost.companyName}</h1>
+                        <h1>CEO: {jobPost.ceoName}</h1>
+                        <h1>Email: {jobPost.companyEmail}</h1>
+                        <h1>Site: {jobPost.companySite}</h1>
+                        <h1>Location: {jobPost.location}</h1>
                         <h1 className="text-xl text-Primary">
                           Applicant Information:
                         </h1>
-                        <h1>Name: {job.applicantName}</h1>
-                        <h1>Email: {job.applicantEmail}</h1>
-                        <h1>Resume: {job.resumeURL}</h1>
+                        <h1>Name: {jobPost.applicantName}</h1>
+                        <h1>Email: {jobPost.applicantEmail}</h1>
+                        <h1>Resume: {jobPost.resumeURL}</h1>
                       </div>
                       <h1 className="font-semibold text-base text-Black/50 mt-2">
-                        Description: {job.description}
+                        Description: {jobPost.description}
                       </h1>
                     </div>
 

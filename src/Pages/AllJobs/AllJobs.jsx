@@ -12,26 +12,20 @@ const AllJobs = () => {
   const [searchText, setSearchText] = useState("");
   const [page, setPage] = useState(1);
   const [activePage, setActivePage] = useState(page);
-  const limit = 8;
 
   // Search Job By Title
   const handleSearchButton = (event) => {
-    setSearchText("");
     event.preventDefault();
-    const inputText = event.target.searchText.value;
-    setSearchText(inputText);
-    event.target.reset();
+    setSearchText(event.target.value);
   };
 
   const allJobPosts = async () => {
-    const res = await axios.get(
-      `allJobPost?title=${searchText}&page=${page}&limit=${limit}`
-    );
+    const res = await axios.get(`allJobPost`);
     return res;
   };
 
   const { isLoading, error, data } = useQuery({
-    queryKey: ["allJobPost", searchText, page, activePage],
+    queryKey: ["allJobPost"],
     queryFn: allJobPosts,
   });
 
@@ -43,14 +37,21 @@ const AllJobs = () => {
   }
   const allJobPost = data?.data?.result;
 
-  //   ===== Pagination =====
-  const postCount = data.data.jobPostCount;
-  const pageCount = Math.ceil(postCount / limit);
-  console.log(postCount);
+  const currentData = allJobPost.filter((post) =>
+    post.title.toLowerCase().includes(searchText.toLowerCase())
+  );
 
-  const pages = [];
-  for (let i = 1; i <= pageCount; i++) {
-    pages.push(i);
+  //   ===== Pagination =====
+  const limit = 4;
+  const skip = page * limit;
+  const pagePost = skip - limit;
+  const currentPage = currentData.slice(pagePost, skip);
+
+  const totalPages = Math.ceil(currentData.length / limit);
+
+  const pageButton = [];
+  for (let i = 1; i <= totalPages; i++) {
+    pageButton.push(i);
   }
 
   const handlePageClick = (page) => {
@@ -69,7 +70,9 @@ const AllJobs = () => {
 
   return (
     <div>
-              <Helmet><title>JN | All Jobs</title></Helmet>
+      <Helmet>
+        <title>JN | All Jobs</title>
+      </Helmet>
       {/* ===== Header ===== */}
       <div className="relative">
         <div className="absolute flex flex-col justify-center items-center h-full w-full bg-Slate/50 space-y-1 md:space-y-2">
@@ -81,17 +84,19 @@ const AllJobs = () => {
             Search By Your Desire Job Name
           </p>
 
-          <form onSubmit={handleSearchButton} className="join">
+          <form className="join">
             <input
               className="text-Secondary bg-White font-semibold border-2 border-r-0 border-White outline-none rounded-s-md px-2 w-36 md:w-56"
               type="text"
               name="searchText"
               required
+              onChange={handleSearchButton}
               id=""
             />
             <input
               className="text-xs md:text-base text-White font-semibold bg-Secondary px-2 py-1 border-2 border-l-0 border-Secondary/30 rounded-e-md"
               type="submit"
+              disabled
               value="Search"
             />
           </form>
@@ -102,7 +107,7 @@ const AllJobs = () => {
       </div>
       <div>{isLoading ? "Loading....." : ""}</div>
       {/* Display All Job Post */}
-      {allJobPost?.length > 0 ? (
+      {currentPage?.length > 0 ? (
         <div className="my-10">
           <div className="overflow-x-auto">
             <table className="table">
@@ -117,10 +122,18 @@ const AllJobs = () => {
               </thead>
               <tbody className="">
                 {/* row 1 */}
-                {allJobPost.map((jobPost, idx) => (
-                  <tr key={idx} className="bg-Primary">
+                {currentPage.map((jobPost, idx) => (
+                  <tr key={idx} className="bg-Primary text-White">
                     <td>
-                      <div className="flex items-center space-x-2">
+                      <div className="flex items-center space-x-3">
+                        <div className="avatar">
+                          <div className="mask mask-squircle w-12 h-12">
+                            <img
+                              src={jobPost.companyLogo}
+                              alt="Avatar Tailwind CSS Component"
+                            />
+                          </div>
+                        </div>
                         <div>
                           <div className="font-bold">{jobPost.title}</div>
                           <div className="text-sm opacity-50">
@@ -129,12 +142,12 @@ const AllJobs = () => {
                         </div>
                       </div>
                     </td>
-                    <td>
+                    <td className="opacity-80">
                       Deadline: {jobPost.deadline}
                       <br />
                       <span>Post Date: {jobPost.postDate}</span>
                     </td>
-                    <td>{jobPost.salary}</td>
+                    <td className="opacity-80">{jobPost.salary}</td>
                     <th>
                       <Link
                         to={`/details/${jobPost._id}`}
@@ -152,7 +165,9 @@ const AllJobs = () => {
           {/* ===== Pagination ===== */}
           <div
             className={
-              postCount > limit ? "join flex justify-center" : "hidden"
+              currentData.length > limit
+                ? "join flex justify-center mt-2"
+                : "hidden"
             }
           >
             <button
@@ -161,13 +176,13 @@ const AllJobs = () => {
             >
               Prev
             </button>
-            {pages.map((page, idx) => (
+            {pageButton.map((page, idx) => (
               <button
                 onClick={() => handlePageClick(page)}
                 key={idx}
                 className={
                   page === activePage
-                    ? "bg-Slate/10 join-item btn"
+                    ? "bg-Slate/70 text-White join-item btn"
                     : "join-item btn"
                 }
               >
@@ -176,7 +191,9 @@ const AllJobs = () => {
             ))}
             <button
               onClick={handleNextButton}
-              className={pages.length === page ? "hidden" : "join-item btn"}
+              className={
+                pageButton.length === page ? "hidden" : "join-item btn"
+              }
             >
               Next
             </button>
