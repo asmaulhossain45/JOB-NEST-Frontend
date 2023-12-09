@@ -1,5 +1,9 @@
 # JOB NEST
 
+## Technology
+- React, Tailwind, MongoDB, Express
+
+## Key Features
 - search job by title
 - Tab filter by category
 - view job post details
